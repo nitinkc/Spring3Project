@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<display-name>San1_FirstApp</display-name>
+
+	<welcome-file-list>
+		<welcome-file>home.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>FirstServlet</servlet-name>
+		<servlet-class>com.pack.servlets.FirstServlet</servlet-class>
+	</servlet>
+	<!-- Mapping should happen AFTER the servlet name has been specified -->
+	<servlet-mapping>
+		<servlet-name>FirstServlet</servlet-name>
+		<url-pattern>/first</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SecondServlet</servlet-name>
+		<servlet-class>com.pack.servlets.SecondServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SecondServlet</servlet-name>
+		<url-pattern>/second</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ThirdServlet</servlet-name>
+		<servlet-class>com.pack.servlets.ThirdServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ThirdServlet</servlet-name>
+		<url-pattern>/third</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NameServlet</servlet-name>
+		<servlet-class>com.pack.servlets.NameServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NameServlet</servlet-name>
+		<url-pattern>/name</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<servlet-class>com.pack.servlets.WelcomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<url-pattern>/welcome</url-pattern>
+	</servlet-mapping>
+</web-app>
