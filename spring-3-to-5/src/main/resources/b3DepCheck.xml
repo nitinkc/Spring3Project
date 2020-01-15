@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Inner Bean Example. -->
+	<bean id="depEmployee" class="com.spring.training.spring3to5.beans.b8dependencyChecking.Employee" >
+		<property name="empId" value="123" />
+		<property name="emp" ref="temp"/>
+	</bean>
+	
+	<!-- dependency-check="all" , dependency-check="simple", dependency-check="object" -->
+	<!-- is also acquired by @Required Annotation -->
+	
+	<!-- <bean id="temp" class="beans.b8dependencyChecking.Person" dependency-check="all"> -->
+	
+	<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor">
+		<bean id="temp" class="beans.b8dependencyChecking.Person">
+				<property name="name" value="Nitin" />
+				<property name="country" value="India" />
+		</bean>
+	</bean>
+</beans>

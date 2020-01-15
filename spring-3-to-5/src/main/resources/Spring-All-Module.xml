@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- When Springs bean configuration files are located in different folders,
+	for easy maintainability, putting all Spring XML files under one final file
+	
+	We can also load multiple Spring Bean Configuration with a String Array in 
+	ClassPathXmlApplicationContext  
+	
+	Hint: mkyong - How to load multiple Spring bean Configuration file
+-->
+<!-- Two ways of declaring XML Definition (gets checked by SAX Parser in IOC Container)
+     1. xmlns : XML Name space declared on the root XML Tag
+     2. DTD Declared on top of the page
+     <?xml version="1.0" encoding="UTF-8"?>
+
+    <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<import resource="a1Spring.xml"/>
+	<import resource="a2SpringOutput.xml"/>
+	<import resource="b1ApplnContextTest.xml"/>
+	<import resource="b2autoWiringTest.xml"/>
+</beans>

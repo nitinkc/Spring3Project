@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<!-- Basic Bean -->
+	<bean id="fruit" class="com.spring.training.spring3to5.beans.b2DIBeans.B1Fruit" />
+
+	<!-- Setter injection using property tag -->
+	<bean id="fruitSetterInjection" class="com.spring.training.spring3to5.beans.b2DIBeans.B1Fruit">
+		<property name="name" value="Grapes" />
+		<property name="season" value="Winter" />
+	</bean>
+
+	<!-- Constructor Injection (index is the index of the constructor, SPRING 
+		ACTS SMARTLY ) BeanCreationException occurs if there is ambiguity
+		 in index,type,name 
+	-->
+	<bean id="fruitConstructorInjection" class="com.spring.training.spring3to5.beans.b2DIBeans.B1Fruit">
+	<!-- <constructor-arg value="Kiwi" index="0" type="java.lang.String" />
+		<constructor-arg value="Winter" index="1" type="java.lang.String" />
+		<constructor-arg value=12345 index="2" type="int" /> 
+	-->
+		
+	<!-- Another way of declaring the value as a tag -->
+		<constructor-arg >
+			 <value>18</value> 
+		</constructor-arg>
+		<constructor-arg >
+			 <value>Winter</value> 
+		</constructor-arg><constructor-arg >
+			 <value>Kiwi</value> 
+		</constructor-arg>
+	</bean>
+
+	<!-- Object Parameter Argument Injection. A Line has two points ref is Object 
+		Parameter Injection value is primitive type Injection -->
+	<bean id="line" class="com.spring.training.spring3to5.beans.b2DIBeans.B3Line">
+		<property name="start" ref="pointA" />
+		<property name="end" ref="pointB" />
+	</bean>
+
+	<!--<bean id="pointA" class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="pointB" class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+		<property name="x" value="20" />
+		<property name="y" value="25" />
+	</bean>-->
+
+	<!-- Inner Bean Example. A line has Two points. One is declared as Inner 
+		Bean, the other one as the regular one (As previous) 
+	-->
+	<bean id="lineInnerBean" class="com.spring.training.spring3to5.beans.b2DIBeans.B3Line">
+		<property name="start" ref="pointZero" />
+		<property name="end">
+			<bean class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+				<property name="x" value="43" />
+				<property name="y" value="78" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="pointZero" class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<!-- Example of a Collection. Sets the list of points that describes the 
+		Rectangle -->
+	
+	<bean id="rectangle" class="com.spring.training.spring3to5.beans.b2DIBeans.B4Rectangle">
+		<property name="point">
+			<list>
+				<!-- One Point is referred using ref -->
+				<ref bean="origin" />
+
+				<bean class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+					<property name="x" value="10" />
+					<property name="y" value="20" />
+				</bean>
+				<bean class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+					<property name="x" value="30" />
+					<property name="y" value="40" />
+				</bean>
+				<bean class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+					<property name="x" value="50" />
+					<property name="y" value="60" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="origin" class="com.spring.training.spring3to5.beans.b2DIBeans.B2Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<!-- Example Demonstrating Beans Scope: The default one is Singleton -->	
+	<bean id="scopeSingleton" class="com.spring.training.spring3to5.beans.b6Scopes.Greetings"> </bean>
+	<!-- Demonstration of Prototyping Scopes -->
+	<bean id="scopePrototype" class="com.spring.training.spring3to5.beans.b6Scopes.Greetings" scope="prototype">
+	</bean>
+	
+	<!-- Date type Injection using the Factory Bean -->
+	<!-- <bean id="dateFormat" class="beans.b6Scopes.Greetings"> 
+		<constructor-arg value="yyyy-mm-dd" />
+	</bean>
+	
+	<bean id="dateTest" class="beans.b6Scopes.Greetings">
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-12-12" />
+			</bean>
+		</property>
+	</bean>  -->
+	
+	<!-- Inheritance Example -->
+	<!-- If the base bean need be a template and not to be instantiated,
+		 one can set abstract="true" -->
+	<bean id="parentCustomerBean" class="com.spring.training.spring3to5.beans.b7Inheritance.Customer">
+		<property name="country" value="India"></property>
+	</bean>
+	
+		<!-- Class name can be avoided -->
+	<bean id="childCustomerBean" parent="parentCustomerBean">
+		<property name="id" value="12345" />
+		<property name="name" value="Nitin" />
+		<!-- Overriding the country attribute -->
+		<!-- <property name="country" value="USA" /> -->
+	</bean>
+	
+	<!-- Defining the Abstract Bean -->
+	<bean id="abstractPersonBean" class="com.spring.training.spring3to5.beans.b7Inheritance.PersonAbstract" abstract="true">
+	</bean>
+	
+	<bean id="abstractPersonBeanChild" parent="abstractPersonBean">
+		<property name="country" value="India"></property>
+		<property name="name" value="Sandeep"></property>
+	</bean>
+	
+	<!-- @RequiredAnnotation -->
+	<bean id="circle" class="com.spring.training.spring3to5.beans.b9Annotation.Circle">
+		<property name="center" ref="centerPoint" />
+	</bean>
+	<bean id="centerPoint" class="com.spring.training.spring3to5.beans.b9Annotation.Point">
+		<property name="x" value="123" />
+		<property name="y" value="456" />
+	</bean>
+	
+	<!-- Autowired Annotation -->
+	<bean id="lineAnno" class="com.spring.training.spring3to5.beans.b9Annotation.Line" />
+	
+	<bean id="point1" class="com.spring.training.spring3to5.beans.b9Annotation.Point">
+		<property name="x" value="10" />
+		<property name="y" value="20" />
+	</bean>
+	
+	<bean id="point2" class="com.spring.training.spring3to5.beans.b9Annotation.Point">
+		<property name="x" value="100" />
+		<property name="y" value="200" />
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+</beans>
