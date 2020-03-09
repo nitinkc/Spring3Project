@@ -2,7 +2,8 @@ package com.fruit.controller.model;
 
 import java.util.List;
 
-public class FruitPaginationForm {
+public class
+FruitPaginationForm {
 
 	private int currentPage;
 	private int noOfRecords;
